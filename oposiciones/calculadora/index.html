@@ -21,6 +21,10 @@
           <input type="date" class="form-control" id="fechaJCCM" value="2019-02-27">
         </div>
         <div class="form-group">
+          <label for="fechaFinJCCM">Fecha comienzo en JCCM</label>
+          <input type="date" class="form-control" id="fechaFinJCCM">
+        </div>
+        <div class="form-group">
           <label for="inputPuntosDiaJCCM">Puntos por dia JCCM</label>
           <input type="number" class="form-control" id="inputPuntosDiaJCCM" value="0.0068">
         </div>
@@ -47,9 +51,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script>
       function calcularPuntos(){
-        var hoy = new Date(); 
         var periodo1 = new Date($("#fechaJCCM").val());
-        var diferenciaEnTiempo = hoy.getTime() - periodo1.getTime();
+        var finPeriodo1 = new Date($("#fechaFinJCCM").val());
+        var diferenciaEnTiempo = finPeriodo1.getTime() - periodo1.getTime();
         var dias = diferenciaEnTiempo / (1000 * 3600 * 24);
         var totalpuntosjccm = $("#inputPuntosDiaJCCM").val() * dias;
         $("#outputPuntosJCCM").val(totalpuntosjccm.toString());
@@ -57,6 +61,7 @@
         $("#outputPuntosSESCAM").val(totalpuntossescam.toString());
       }
       $(document).ready(function() {
+        document.getElementById('fechaFinJCCM').valueAsDate = new Date();
         calcularPuntos();
       })
 
